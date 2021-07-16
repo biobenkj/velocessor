@@ -10,7 +10,9 @@ import_droplet_txis(
   type = c("alevin"),
   QC = TRUE,
   tpms = FALSE,
+  su_tpms = FALSE,
   sep = "_",
+  fixrn = TRUE,
   ...
 )
 }
@@ -25,7 +27,11 @@ import_droplet_txis(
 
 \item{tpms}{compute TPMs? (FALSE; can create a CHOLMOD error)}
 
+\item{su_tpms}{compute spliced/unspliced TPMs? (FALSE; as above)}
+
 \item{sep}{What string separates sample name from barcode? ("_")}
+
+\item{fixrn}{Fix goofy versioned ENSEMBL gene names? (TRUE)}
 
 \item{...}{additional parameters to pass to tximport, if any}
 }
@@ -42,4 +48,8 @@ separator character between the assigned sample name and the trimmed barcode.
 }
 \details{
 FIXME: Add Kallisto support and Arkas style txome/repeatome/spikeome support.
+
+TPM calculation is disabled by default due to a tendency to crash sessions.
+The function velocessor::add_tpm handles the grunt work for this at present.
+It would probably be a good idea to do it more efficiently (e.g. in C++).
 }
